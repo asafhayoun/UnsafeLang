@@ -18,7 +18,11 @@ function UnsafeLang(code) {
       html += code[i];
     }
   }
-  return `<style>${css}</style>${html}<script>${js}</script>`;
+  let result = '';
+  if(css) result += `<link rel="stylesheet" href="data:text/css;base64,${btoa(css)}" />`;
+  if(html) result += html;
+  if(js) result += `<script src="data:text/javascript;base64,${btoa(js)}"></script>`;
+  return result;
 }
 
 /**
